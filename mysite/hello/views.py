@@ -1,14 +1,11 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from django.shortcuts import render
+
+from datetime import datetime
+from django.shortcuts import render
+
 
 def index(request):
-    return HttpResponse("Главная")
-
-
-def about(request):
-    return HttpResponse("О сайте")
-
-
-def contact(request):
-    return HttpResponse("Контакты")
+    return render(request, "hello/index.html", context={"my_date": datetime.now()})
