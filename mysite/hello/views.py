@@ -1,11 +1,15 @@
+
+from django.shortcuts import render
 from django.http import HttpResponse
-from django.shortcuts import render
 
-from django.shortcuts import render
-
-from datetime import datetime
-from django.shortcuts import render
+from hello.forms import UserForm
 
 
 def index(request):
-    return render(request, "hello/index.html", context={"my_date": datetime.now()})
+    userform = UserForm()
+    if request.method == "POST":
+        userform = UserForm(request.POST)
+        if userform.is_valid():
+            name = userform.cleaned_data["name"]
+            return HttpResponse(f"<h2>Hello, {name}</h2>")
+    return render(request, "index.html", {"form": userform})
